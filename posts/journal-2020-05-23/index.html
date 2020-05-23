@@ -107,6 +107,15 @@ task <span style="color:#e6db74">:reset</span>
   <span style="color:#66d9ef">Rake</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Task</span><span style="color:#f92672">[</span><span style="color:#e6db74">:init</span><span style="color:#f92672">].</span>execute
 <span style="color:#66d9ef">end</span></code></pre></div>
 </div>
+<h2 id="headline-4">
+IRB
+</h2>
+<p>
+irb 有简单的任务控制，在 irb 输入 irb，就进入了新的 irb。fg n 会进入第 n 号 irb，而 jobs 函数可以看到目前的 irb 情况。
+</p>
+<p>
+假如在 tool/x.rb 里有一些帮助函数。想要进入 irb 之前加载这个函数，只需要 irb -Ilib -rx。
+</p>
 
     </div>
     <div class="post-footer">
