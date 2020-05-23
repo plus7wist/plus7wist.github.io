@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <title>Journal 2019 12 25 // plus7wist&#39;s blog</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="plus7wist" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://plus7wist.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Journal 2019 12 25"/>
+<meta name="twitter:description" content="powershell 环境变量 # 查看环境变量 ls env: # 输出环境变量 path 的值。Powershell 是大小写不敏感的 echo $env:path # 查看所有变量 ls variable: # 测试 name 变量是否存在 test-path variable:name # 测试环境变量 name 是否存在 test-path env:name haskell - ghc &gt;&gt;&gt; pacman -S ghc ghc-static &gt;&gt;&gt; cat hello.hs main = putStrLn &quot;Hello, world&quot; &gt;&gt;&gt; ghc --make hello.hs [1 of 1] Compiling Main ( hello.hs, hello.o ) Linking hello ... &gt;&gt;&gt; ls hello hello.hi hello.hs hello.o &gt;&gt;&gt; ./hello Hello, world haskell - IO action ghci&gt; :t getLine getLine :: IO String getLine 返回一个得到 String 的 IO action。用 name &lt;- getLine 解开这个包，而 name = getLine，使得 name 获取了这个 IO action。"/>
+
+    <meta property="og:title" content="Journal 2019 12 25" />
+<meta property="og:description" content="powershell 环境变量 # 查看环境变量 ls env: # 输出环境变量 path 的值。Powershell 是大小写不敏感的 echo $env:path # 查看所有变量 ls variable: # 测试 name 变量是否存在 test-path variable:name # 测试环境变量 name 是否存在 test-path env:name haskell - ghc &gt;&gt;&gt; pacman -S ghc ghc-static &gt;&gt;&gt; cat hello.hs main = putStrLn &quot;Hello, world&quot; &gt;&gt;&gt; ghc --make hello.hs [1 of 1] Compiling Main ( hello.hs, hello.o ) Linking hello ... &gt;&gt;&gt; ls hello hello.hi hello.hs hello.o &gt;&gt;&gt; ./hello Hello, world haskell - IO action ghci&gt; :t getLine getLine :: IO String getLine 返回一个得到 String 的 IO action。用 name &lt;- getLine 解开这个包，而 name = getLine，使得 name 获取了这个 IO action。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://plus7wist.github.io/posts/journal-2019-12-25/" />
+<meta property="article:published_time" content="2019-12-25T10:50:34+08:00" />
+<meta property="article:modified_time" content="2019-12-25T10:50:34+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://plus7wist.github.io/"><img class="app-header-avatar" src="/images/avatar.jpg" alt="plus7wist" /></a>
+      <h1>plus7wist&#39;s blog</h1>
+      <p>Ph&#39;nglui mglw&#39;nafh Cthulhu R&#39;lyeh wgah&#39;nagl fhtagn</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/plus7wist" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Journal 2019 12 25</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 25, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://plus7wist.github.io/tags/journal/">journal</a></div></div>
+    </header>
+    <div class="post-content">
+      <h2 id="powershell-环境变量">powershell 环境变量</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e"># 查看环境变量</span>
+ls env<span style="color:#960050;background-color:#1e0010">:</span>
+
+<span style="color:#75715e"># 输出环境变量 path 的值。Powershell 是大小写不敏感的</span>
+echo $env:path
+
+<span style="color:#75715e"># 查看所有变量</span>
+ls variable<span style="color:#960050;background-color:#1e0010">:</span>
+
+<span style="color:#75715e"># 测试 name 变量是否存在</span>
+test-path variable<span style="color:#960050;background-color:#1e0010">:</span>name
+
+<span style="color:#75715e"># 测试环境变量 name 是否存在</span>
+test-path env<span style="color:#960050;background-color:#1e0010">:</span>name
+</code></pre></div><h2 id="haskell---ghc">haskell - ghc</h2>
+<pre><code>&gt;&gt;&gt; pacman -S ghc ghc-static
+&gt;&gt;&gt; cat hello.hs
+main = putStrLn &quot;Hello, world&quot;
+&gt;&gt;&gt; ghc --make hello.hs
+[1 of 1] Compiling Main             ( hello.hs, hello.o )
+Linking hello ...
+&gt;&gt;&gt; ls
+hello  hello.hi  hello.hs  hello.o
+&gt;&gt;&gt; ./hello
+Hello, world
+</code></pre><h2 id="haskell---io-action">haskell - IO action</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">ghci</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">:</span>t getLine
+<span style="color:#a6e22e">getLine</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span> <span style="color:#66d9ef">String</span>
+</code></pre></div><p><code>getLine</code> 返回一个得到 <code>String</code> 的 IO action。用 <code>name &lt;- getLine</code> 解开这个包，而 <code>name = getLine</code>，使得 <code>name</code> 获取了这个 IO action。</p>
+<h2 id="类型类">类型类</h2>
+<table>
+<thead>
+<tr>
+<th>Haskell</th>
+<th>Java</th>
+<th>Rust</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Typeclass</td>
+<td>Interface</td>
+<td>Trait</td>
+</tr>
+</tbody>
+</table>
+<h2 id="类型类-1">类型类</h2>
+<table>
+<thead>
+<tr>
+<th>Java</th>
+<th>Haskell</th>
+<th>Rust</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interface</td>
+<td>Typeclass</td>
+<td>Trait</td>
+</tr>
+</tbody>
+</table>
+<h2 id="haskell---return">Haskell - return</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">ghci</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">:</span>t return
+<span style="color:#a6e22e">return</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Monad</span> m <span style="color:#f92672">=&gt;</span> a <span style="color:#f92672">-&gt;</span> m a
+</code></pre></div><p>Haskell 的 <code>return</code> 是一个函数。</p>
+<h2 id="haskell---函子举例---io-action">Haskell - 函子举例 - IO action</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Functor</span> <span style="color:#66d9ef">IO</span> <span style="color:#66d9ef">where</span>
+    fmap f action <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+        result <span style="color:#f92672">&lt;-</span> action
+        return (f result)
+</code></pre></div><p><code>return x</code>，现在不知道为什么，会返回得到 <code>x</code> 的 IO action。</p>
+<h2 id="haskell---函子举例---半映射">Haskell - 函子举例 - 半映射</h2>
+<p><code>a -&gt; b</code> 是一个映射的类型，这个类型也能写成 <code>(-&gt;) a b</code>，也是就说 <code>(-&gt;)</code> 是个类型构造子。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Functor</span> ((<span style="color:#f92672">-&gt;</span>) a) <span style="color:#66d9ef">where</span>
+    fmap f g <span style="color:#f92672">=</span> (<span style="color:#a6e22e">\</span>x <span style="color:#f92672">-&gt;</span> f (g x))
+</code></pre></div><p><code>fmap</code> 是 <code>(u -&gt; v) -&gt; f u -&gt; f v</code>，将 <code>(-&gt;) a</code> 当作 <code>f</code> 代入得到 <code>(u -&gt; v) -&gt; (a -&gt; u) -&gt; (a -&gt; v)</code>。实际上就是函数组合。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Functor</span> ((<span style="color:#f92672">-&gt;</span>) a) <span style="color:#66d9ef">where</span>
+    fmap <span style="color:#f92672">=</span> (<span style="color:#f92672">.</span>)
+</code></pre></div><h2 id="haskell---提升lifting">Haskell - 提升（lifting）</h2>
+<p><code>fmap (a -&gt; b)</code> 的类型是 <code>f a -&gt; f b</code>，这里的 <code>f</code> 是一个 <code>Functor</code>。例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">ghci</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">:</span>t fmap (<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">fmap</span> (<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">::</span> (<span style="color:#66d9ef">Num</span> a, <span style="color:#66d9ef">Functor</span> f) <span style="color:#f92672">=&gt;</span> f a <span style="color:#f92672">-&gt;</span> f b
+<span style="color:#a6e22e">ghci</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">:</span>t fmap (replicate <span style="color:#ae81ff">3</span>)
+<span style="color:#a6e22e">fmap</span> (replicate <span style="color:#ae81ff">3</span>) <span style="color:#f92672">::</span> (<span style="color:#66d9ef">Functor</span> f) <span style="color:#f92672">=&gt;</span> f a <span style="color:#f92672">-&gt;</span> f [a]
+</code></pre></div><p><code>(*2)</code> 是一个函数，类型是 <code>a -&gt; b</code>；<code>fmap (*2)</code> 是 <code>f a -&gt; f b</code>。<code>fmap (*2)</code> 就比 <code>(*2)</code> 更高级一点，所以这个过程就叫提升（lifting）。</p>
+<h2 id="haskell---functor-law---1">Haskell - functor law - 1</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">fmap</span> id <span style="color:#f92672">=</span> id
+</code></pre></div><p><code>fmap f</code> 提升了 <code>f</code>，而提升成什么，是函子的实现决定的。但是它应该只是『提升』，而不是要改变函数本身的意义。所以 <code>fmap id</code>，还应该是 <code>id</code> 函数。当然我们可以说，第一个 <code>id</code> 是 <code>a -&gt; a</code>，第二个 <code>id</code> 是 <code>f a -&gt; f b</code>。</p>
+<p>例如说：对 <code>[]</code> 实现了 <code>Functor</code>，它的 <code>fmap</code> 也就是 <code>map</code>，<code>map id</code> 作用到一个 <code>[a]</code> 上，显然会得到原来的列表。</p>
+<h2 id="haskell---functor-law---2">Haskell - functor law - 2</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">fmap</span> (f <span style="color:#f92672">.</span> g) <span style="color:#f92672">=</span> fmap f <span style="color:#f92672">.</span> fmap g
+</code></pre></div><p><code>f</code> 的提升复合 <code>g</code> 的提升，应该是 <code>f</code> 复合 <code>g</code> 的提升。</p>
+<h2 id="haskell---函子的复合">Haskell - 函子的复合</h2>
+<p>函子的实现，决定它如何与函数复合。</p>
+<ul>
+<li><code>[1,2,3]</code> 视作一个『输出』1、2、3 的『函数』，那么 <code>fmap (*3) [1, 2, 3]</code> 也就是在这个函数上复合 <code>(*3)</code> 这个函数，根据 <code>[]</code> 的 <code>fmap</code> 实现，这个复合方式是在对每个『输出』的数据调用 <code>(*3)</code> 这个函数。</li>
+<li><code>Nothing :: Num a =&gt; Maybe a</code> 视作什么都不『输出』的函数，<code>fmap (+1) Nothing</code>，就是让这个什么都不输出的函数复合上 <code>(+1)</code> 这个函数。</li>
+<li><code>(+1) :: Num a =&gt; a -&gt; a</code> 是一个函数，<code>fmap (*3) (+1)</code> 就是两个函数的复合。</li>
+</ul>
+<p>实现函子是实现广义函数复合。</p>
+<h2 id="haskell---投喂参数">Haskell - 投喂参数</h2>
+<p>一个函数的可能是 <code>f :: a -&gt; b -&gt; c</code>，利用柯里化，我们可以这样调用它：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">(((f a) b) c)
+</code></pre></div><p>我们这样理解这个过程，给 <code>f</code> 喂了一个函数，它就变成了还要投喂两个参数的函数。投喂了三个参数后，它就变成了一个值。</p>
+<h2 id="haskell---y-组合子">Haskell - y 组合子</h2>
+<p>因为 Haskell 的静态类型检查，在 Haskell 里直接利用 y 组合子是不行的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">yfact</span> y n <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">then</span> <span style="color:#ae81ff">1</span>
+                      <span style="color:#66d9ef">else</span> n <span style="color:#f92672">*</span> ((y y) <span style="color:#f92672">$</span> (n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">fact</span> <span style="color:#f92672">=</span> yfact yfact
+</code></pre></div><p>需要强制打破类型检查：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">import</span> Unsafe.Coerce
+<span style="color:#a6e22e">yfact</span> y n <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">then</span> <span style="color:#ae81ff">1</span>
+                      <span style="color:#66d9ef">else</span> n <span style="color:#f92672">*</span> ((y (unsafeCoerce y)) <span style="color:#f92672">$</span> (n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">fact</span> <span style="color:#f92672">=</span> yfact yfact
+</code></pre></div><h2 id="android-studio-和-android-sdk">Android Studio 和 Android SDK</h2>
+<pre><code>yay -S android-studio
+</code></pre><p>打开 IDE，它会指引下载 Android SDK。</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

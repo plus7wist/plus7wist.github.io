@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <title>rm 的小故事 // plus7wist&#39;s blog</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="plus7wist" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://plus7wist.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="rm 的小故事"/>
+<meta name="twitter:description" content="当在一个空目录做这样的事情：
+touch ./-i a b c rm * 基本上，rm 会交互式的命令确认删除。这是因为 * 扩展把 -i（文件名）扩展到了 rm 的选项里面。而 -i 对 rm 来说，是打开交互式确认的选项。
+所以 bash 脚本里面不应该直接使用 * 来扩展文件名，至少要使用 ./*。
+这应该归咎于命令行工具对参数完全不做类型区分，广义上归属于进程之间消息传递的框架缺失。如果 rm 是一个函数，那么它的设计十分糟糕。它有八九个选项，选项之间有非常细微的区别。这就好像这样的函数声明：
+def rm(*file_list, **options): do_remove_file(file_list, options) 对于这种函数的重构，基本上是采取包装办法，将常用的选项组合提取出一组函数来，然后弃用 rm，这个过程中，既能淘汰不常用甚至本身无意义的参数组合，也能指导进一步重构。
+def rm_file(file_path): rm(file_path) def rm_recursive(file_or_dir): rm(file_or_dir, recursive=True) def rm_interactive(file_or_dir): rm(file_or_dir, interactive=True) 但是我们对这些函数都有 -f 的要求，还能要求它们能组合多个文件。这时候我们就需要重新抽象：-f 是应用在被删除对象上的，其它选项也类似。所以我们的做法可能是：
+class DeleteTarget: def __init__(self, target): self.target = target self.interactive_ = False self.force_ = False self.recursive_ = False def interactive(self, interactive): self."/>
+
+    <meta property="og:title" content="rm 的小故事" />
+<meta property="og:description" content="当在一个空目录做这样的事情：
+touch ./-i a b c rm * 基本上，rm 会交互式的命令确认删除。这是因为 * 扩展把 -i（文件名）扩展到了 rm 的选项里面。而 -i 对 rm 来说，是打开交互式确认的选项。
+所以 bash 脚本里面不应该直接使用 * 来扩展文件名，至少要使用 ./*。
+这应该归咎于命令行工具对参数完全不做类型区分，广义上归属于进程之间消息传递的框架缺失。如果 rm 是一个函数，那么它的设计十分糟糕。它有八九个选项，选项之间有非常细微的区别。这就好像这样的函数声明：
+def rm(*file_list, **options): do_remove_file(file_list, options) 对于这种函数的重构，基本上是采取包装办法，将常用的选项组合提取出一组函数来，然后弃用 rm，这个过程中，既能淘汰不常用甚至本身无意义的参数组合，也能指导进一步重构。
+def rm_file(file_path): rm(file_path) def rm_recursive(file_or_dir): rm(file_or_dir, recursive=True) def rm_interactive(file_or_dir): rm(file_or_dir, interactive=True) 但是我们对这些函数都有 -f 的要求，还能要求它们能组合多个文件。这时候我们就需要重新抽象：-f 是应用在被删除对象上的，其它选项也类似。所以我们的做法可能是：
+class DeleteTarget: def __init__(self, target): self.target = target self.interactive_ = False self.force_ = False self.recursive_ = False def interactive(self, interactive): self." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://plus7wist.github.io/posts/rm/" />
+<meta property="article:published_time" content="2020-03-17T10:59:03+08:00" />
+<meta property="article:modified_time" content="2020-03-17T10:59:03+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://plus7wist.github.io/"><img class="app-header-avatar" src="/images/avatar.jpg" alt="plus7wist" /></a>
+      <h1>plus7wist&#39;s blog</h1>
+      <p>Ph&#39;nglui mglw&#39;nafh Cthulhu R&#39;lyeh wgah&#39;nagl fhtagn</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/plus7wist" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">rm 的小故事</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 17, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <p>当在一个空目录做这样的事情：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">touch ./-i a b c
+rm *
+</code></pre></div><p>基本上，<code>rm</code> 会交互式的命令确认删除。这是因为 <code>*</code> 扩展把 <code>-i</code>（文件名）扩展到了
+<code>rm</code> 的选项里面。而 <code>-i</code> 对 <code>rm</code> 来说，是打开交互式确认的选项。</p>
+<p>所以 bash 脚本里面不应该直接使用 <code>*</code> 来扩展文件名，至少要使用 <code>./*</code>。</p>
+<p>这应该归咎于命令行工具对参数完全不做类型区分，广义上归属于进程之间消息传递的框架缺失。如果 <code>rm</code> 是一个函数，那么它的设计十分糟糕。它有八九个选项，选项之间有非常细微的区别。这就好像这样的函数声明：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rm</span>(<span style="color:#f92672">*</span>file_list, <span style="color:#f92672">**</span>options):
+    do_remove_file(file_list, options)
+</code></pre></div><p>对于这种函数的重构，基本上是采取包装办法，将常用的选项组合提取出一组函数来，然后弃用 <code>rm</code>，这个过程中，既能淘汰不常用甚至本身无意义的参数组合，也能指导进一步重构。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rm_file</span>(file_path):
+    rm(file_path)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rm_recursive</span>(file_or_dir):
+    rm(file_or_dir, recursive<span style="color:#f92672">=</span>True)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rm_interactive</span>(file_or_dir):
+    rm(file_or_dir, interactive<span style="color:#f92672">=</span>True)
+</code></pre></div><p>但是我们对这些函数都有 <code>-f</code> 的要求，还能要求它们能组合多个文件。这时候我们就需要重新抽象：<code>-f</code> 是应用在被删除对象上的，其它选项也类似。所以我们的做法可能是：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DeleteTarget</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, target):
+        self<span style="color:#f92672">.</span>target <span style="color:#f92672">=</span> target
+        self<span style="color:#f92672">.</span>interactive_ <span style="color:#f92672">=</span> False
+        self<span style="color:#f92672">.</span>force_ <span style="color:#f92672">=</span> False
+        self<span style="color:#f92672">.</span>recursive_ <span style="color:#f92672">=</span> False
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interactive</span>(self, interactive):
+        self<span style="color:#f92672">.</span>interactive_ <span style="color:#f92672">=</span> interactive
+        <span style="color:#66d9ef">return</span> self
+    
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">force</span>(self, force):
+        self<span style="color:#f92672">.</span>force_ <span style="color:#f92672">=</span> force
+        <span style="color:#66d9ef">return</span> self
+    
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recursive</span>(self, recursive):
+        self<span style="color:#f92672">.</span>recursive_ <span style="color:#f92672">=</span> recursive
+        <span style="color:#66d9ef">return</span> self
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rm_target_list</span>(<span style="color:#f92672">*</span>delete_target_list):
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> delete_target_list:
+    	rm_target(x)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rm_target</span>(delete_target):
+    options <span style="color:#f92672">=</span> dict(
+    	force<span style="color:#f92672">=</span>delete_target<span style="color:#f92672">.</span>force_,
+        recursive<span style="color:#f92672">=</span>delete_target<span style="color:#f92672">.</span>recursive_,
+        interactive<span style="color:#f92672">=</span>delete_target<span style="color:#f92672">.</span>interactive_,
+    )
+    rm(delete_target<span style="color:#f92672">.</span>target, <span style="color:#f92672">**</span>options)
+</code></pre></div><p>这在 shell 的世界里大概需要解析一种属性协议。比如我们用等号风格的命令行参数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rm_target <span style="color:#f92672">=</span>path1 f<span style="color:#f92672">=</span>path2 ir<span style="color:#f92672">=</span>path3
+<span style="color:#75715e"># rm path1</span>
+<span style="color:#75715e"># rm -f path2</span>
+<span style="color:#75715e"># rm -ir path3</span>
+</code></pre></div><p>这样无论 <code>path</code> 里有什么奇怪的字符，都不会导致我们的工作意义不明。</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

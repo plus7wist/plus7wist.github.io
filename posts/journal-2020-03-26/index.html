@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <title>Journal 2020 03 26 // plus7wist&#39;s blog</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="plus7wist" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://plus7wist.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Journal 2020 03 26"/>
+<meta name="twitter:description" content="Python - argparse 的子命令  import argparse def parse_cli(): parser = argparse.ArgumentParser() # 用解析参数的 command 字段标识参数命令是什么 subparsers = parser.add_subparsers(dest=&#34;command&#34;) # 子命令 add parser_add = subparsers.add_parser(&#34;add&#34;) parser_add.add_argument(&#34;file&#34;, nargs=&#39;&#43;&#39;) # 子命令 commit parser_commit = subparsers.add_parser(&#34;commit&#34;) parser_commit.add_argument(&#34;-m&#34;, &#34;--message&#34;) return parser.parse_args()   还可以用回调的方式： import argparse def cli(add, commit): parser = argparse.ArgumentParser() # 用解析参数的 command 字段标识参数命令是什么 subparsers = parser.add_subparsers(dest=&#34;command&#34;) # 子命令 add parser_add = subparsers.add_parser(&#34;add&#34;) parser_add.add_argument(&#34;file&#34;, nargs=&#39;&#43;&#39;) parser_add.set_default(func=add) # 子命令 commit parser_commit = subparsers."/>
+
+    <meta property="og:title" content="Journal 2020 03 26" />
+<meta property="og:description" content="Python - argparse 的子命令  import argparse def parse_cli(): parser = argparse.ArgumentParser() # 用解析参数的 command 字段标识参数命令是什么 subparsers = parser.add_subparsers(dest=&#34;command&#34;) # 子命令 add parser_add = subparsers.add_parser(&#34;add&#34;) parser_add.add_argument(&#34;file&#34;, nargs=&#39;&#43;&#39;) # 子命令 commit parser_commit = subparsers.add_parser(&#34;commit&#34;) parser_commit.add_argument(&#34;-m&#34;, &#34;--message&#34;) return parser.parse_args()   还可以用回调的方式： import argparse def cli(add, commit): parser = argparse.ArgumentParser() # 用解析参数的 command 字段标识参数命令是什么 subparsers = parser.add_subparsers(dest=&#34;command&#34;) # 子命令 add parser_add = subparsers.add_parser(&#34;add&#34;) parser_add.add_argument(&#34;file&#34;, nargs=&#39;&#43;&#39;) parser_add.set_default(func=add) # 子命令 commit parser_commit = subparsers." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://plus7wist.github.io/posts/journal-2020-03-26/" />
+<meta property="article:published_time" content="2020-03-26T15:09:21+08:00" />
+<meta property="article:modified_time" content="2020-03-26T15:09:21+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://plus7wist.github.io/"><img class="app-header-avatar" src="/images/avatar.jpg" alt="plus7wist" /></a>
+      <h1>plus7wist&#39;s blog</h1>
+      <p>Ph&#39;nglui mglw&#39;nafh Cthulhu R&#39;lyeh wgah&#39;nagl fhtagn</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/plus7wist" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Journal 2020 03 26</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 26, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+<h2 id="headline-1">
+Python - argparse 的子命令
+</h2>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> argparse
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse_cli</span>():
+    parser <span style="color:#f92672">=</span> argparse<span style="color:#f92672">.</span>ArgumentParser()
+
+    <span style="color:#75715e"># 用解析参数的 command 字段标识参数命令是什么</span>
+    subparsers <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>add_subparsers(dest<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;command&#34;</span>)
+
+    <span style="color:#75715e"># 子命令 add</span>
+    parser_add <span style="color:#f92672">=</span> subparsers<span style="color:#f92672">.</span>add_parser(<span style="color:#e6db74">&#34;add&#34;</span>)
+    parser_add<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#34;file&#34;</span>, nargs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;+&#39;</span>)
+
+    <span style="color:#75715e"># 子命令 commit</span>
+    parser_commit <span style="color:#f92672">=</span> subparsers<span style="color:#f92672">.</span>add_parser(<span style="color:#e6db74">&#34;commit&#34;</span>)
+    parser_commit<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#34;-m&#34;</span>, <span style="color:#e6db74">&#34;--message&#34;</span>)
+
+    <span style="color:#66d9ef">return</span> parser<span style="color:#f92672">.</span>parse_args()</code></pre></div>
+</div>
+<p>
+还可以用回调的方式：
+</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> argparse
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cli</span>(add, commit):
+    parser <span style="color:#f92672">=</span> argparse<span style="color:#f92672">.</span>ArgumentParser()
+
+    <span style="color:#75715e"># 用解析参数的 command 字段标识参数命令是什么</span>
+    subparsers <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>add_subparsers(dest<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;command&#34;</span>)
+
+    <span style="color:#75715e"># 子命令 add</span>
+    parser_add <span style="color:#f92672">=</span> subparsers<span style="color:#f92672">.</span>add_parser(<span style="color:#e6db74">&#34;add&#34;</span>)
+    parser_add<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#34;file&#34;</span>, nargs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;+&#39;</span>)
+    parser_add<span style="color:#f92672">.</span>set_default(func<span style="color:#f92672">=</span>add)
+
+    <span style="color:#75715e"># 子命令 commit</span>
+    parser_commit <span style="color:#f92672">=</span> subparsers<span style="color:#f92672">.</span>add_parser(<span style="color:#e6db74">&#34;commit&#34;</span>)
+    parser_commit<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#34;-m&#34;</span>, <span style="color:#e6db74">&#34;--message&#34;</span>)
+    parser_commit<span style="color:#f92672">.</span>set_default(func<span style="color:#f92672">=</span>commit)
+
+    args <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse_args()
+    <span style="color:#66d9ef">return</span> args<span style="color:#f92672">.</span>func(args)</code></pre></div>
+</div>
+<p>
+实在是啰里八嗦。
+</p>
+<h2 id="headline-2">
+Python - 日期格式
+</h2>
+<p>
+time.asctime() 可以得到一个当前日期时间的字符串表示。
+</p>
+<h2 id="headline-3">
+Python - 赋值表达式
+</h2>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> (code :<span style="color:#f92672">=</span> command()) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+    <span style="color:#66d9ef">return</span> code</code></pre></div>
+</div>
+<h2 id="headline-4">
+Rust - 路径和字符串
+</h2>
+<p>
+目前 PathBuf 底层是 OsString，所以不能无消耗地转换成 &amp;[u8]。
+</p>
+<p>
+Path 有构造器：
+</p>
+<div class="src src-rust">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span><span style="color:#f92672">&lt;</span>S: AsRef<span style="color:#f92672">&lt;</span>OsStr<span style="color:#f92672">&gt;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">?</span>Sized<span style="color:#f92672">&gt;</span>(s: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">S</span>) -&gt; <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">Path</span>
+</code></pre></div>
+</div>
+<p>
+String 是 AsRef&lt;OsStr&gt;，所以 String 可以用来构造 Path。
+</p>
+<p>
+Path 有下面的方法：
+</p>
+<div class="src src-rust">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">to_str</span>(<span style="color:#f92672">&amp;</span>self) -&gt; Option<span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span>;
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">to_string_lossy</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">Cow</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span>;
+</code></pre></div>
+</div>
+<p>
+to_str() 可能失败，所以返回 Option。
+</p>
+<p>
+而 to_string_lossy()，则不会失败，当路径不是 Utf8 的时候，会把失败的地
+方转换成 U+FFFD REPLACEMENT CHARACTER，这是 Unicode 的一种表示解析错
+误的办法。
+</p>
+<p>
+如果发生了转换，那么返回的就是 Cow::Owned，而不发生转换，返回的就是
+Cow::Borrowed。
+</p>
+<h2 id="headline-5">
+Emacs - 读文件
+</h2>
+<p>
+Vim 的 :r $FILE 命令，在 Emacs 里是 insert-file-literally。
+</p>
+<div class="src src-lisp">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(insert-file-literally file_name)</code></pre></div>
+</div>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

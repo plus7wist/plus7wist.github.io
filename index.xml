@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plus7wist&#39;s blog</title>
+    <link>https://plus7wist.github.io/</link>
+    <description>Recent content on plus7wist&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 23 May 2020 15:24:27 +0800</lastBuildDate>
+    
+	<atom:link href="https://plus7wist.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Journal 2020 05 23</title>
+      <link>https://plus7wist.github.io/posts/journal-2020-05-23/</link>
+      <pubDate>Sat, 23 May 2020 15:24:27 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2020-05-23/</guid>
+      <description>退出 Vim 的 Easy Mode   vim -y 进入 Easy Mode，这个模式下没有办法用 ESC 进入 Normal 模式，也就没有办法用 q 命令退出 Vim。这时要用 C-L 进入 Normal 模式，然而我的 C-L 被绑定在输入 lambda 符号上了，最后只能杀死 vim 进程，然后把这个功能改到了 &amp;lt;leader&amp;gt;L 上。  但是如果这样，那 &amp;lt;leader&amp;gt; 按键就会因为要等待按键而不能及时反应，所以我又把改了之后的又删掉了。 RD   RD 是 ruby 的 POD，比 Perl 的 POD 更好读一点。解释工具是 rd2，它是一个 gem。rd2 可以把 RD 翻译成 HTML。 编写 Rake 任务   Ruby 的语法在这件事情上表现的其实不错。并不比 Makefile 和 Bash 之类繁琐。 task :publish do cd public_dir do sh &amp;#39;git add .</description>
+    </item>
+    
+    <item>
+      <title>Chezmoi 与 Gpg</title>
+      <link>https://plus7wist.github.io/posts/chezmoi-gpg/</link>
+      <pubDate>Fri, 10 Apr 2020 11:41:25 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/chezmoi-gpg/</guid>
+      <description>Chezmoi Chezmoi 可以在机器之间管理配置文件。我有一份镜像在：http://gitee.com/plus7wist/go-chezmoi。Ubuntu Linux 里可以用 snap 安装一个比较好的版本。
+它需要配合一个 git 库，放在 ~/.local/share/chezmoi。用 ~/.config/chezmoi/chezmoi.toml 配置 chezmoi 的行为。当需要用 chezmoi 管理 ssh 密钥等比较私密的内容时，就需要联合一种加密工具，而我用的是 gpg。根据 chezmoi 的文档，我需要在 ~/.config/chezmoi/chezmoi.toml 配置 gpg 接受者的公钥：
+[gpg] recipient = &amp;#34;plus7wist &amp;lt;gu_castle@163.com&amp;gt;&amp;#34; 这样一来，用 chezmoi add &amp;ndash;encrypt 添加的文件，就会以加密文件的形式存放在 ~/.local/share/chezmoi 里，配置仓库就可以放心的公开分享了。
+Gpg gpg 的私钥需要妥善管理。一般都存放到一个独立的 U 盘上。用下面的命令导出密钥：
+gpg --armor --output secret.txt --export-secret-keys 而下面的命令导出公钥：
+gpg --armor --output public.txt --export 可以将公钥用邮件或者公钥服务器等方法分享出去。
+或者，如果你的备份是直接保存 /home 分区，那么在有私钥的家目录中的 .gnupg 文件夹里有对应的密钥。用 &amp;ndash;homedir 指定这个备份位置，就可以导出密钥了：
+gpg --homedir /mnt/backup-data/home/user/.gnupg \  --armor --output public.txt --export-secret-keys 导入密钥对之后，它处于一种不被信任的状态，需要用 gpg &amp;ndash;edit-key KEY_ID 来把私钥标记成可信的。这个命令进入 gpg 的交互命令行，输入 trust，弹出菜单，选择完全（fully）信任或者基本（ultimately）信任即可。</description>
+    </item>
+    
+    <item>
+      <title>Journal 2020 03 26</title>
+      <link>https://plus7wist.github.io/posts/journal-2020-03-26/</link>
+      <pubDate>Thu, 26 Mar 2020 15:09:21 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2020-03-26/</guid>
+      <description>Python - argparse 的子命令  import argparse def parse_cli(): parser = argparse.ArgumentParser() # 用解析参数的 command 字段标识参数命令是什么 subparsers = parser.add_subparsers(dest=&amp;#34;command&amp;#34;) # 子命令 add parser_add = subparsers.add_parser(&amp;#34;add&amp;#34;) parser_add.add_argument(&amp;#34;file&amp;#34;, nargs=&amp;#39;+&amp;#39;) # 子命令 commit parser_commit = subparsers.add_parser(&amp;#34;commit&amp;#34;) parser_commit.add_argument(&amp;#34;-m&amp;#34;, &amp;#34;--message&amp;#34;) return parser.parse_args()   还可以用回调的方式： import argparse def cli(add, commit): parser = argparse.ArgumentParser() # 用解析参数的 command 字段标识参数命令是什么 subparsers = parser.add_subparsers(dest=&amp;#34;command&amp;#34;) # 子命令 add parser_add = subparsers.add_parser(&amp;#34;add&amp;#34;) parser_add.add_argument(&amp;#34;file&amp;#34;, nargs=&amp;#39;+&amp;#39;) parser_add.set_default(func=add) # 子命令 commit parser_commit = subparsers.</description>
+    </item>
+    
+    <item>
+      <title>我的英语老师</title>
+      <link>https://plus7wist.github.io/posts/english-teacher/</link>
+      <pubDate>Thu, 19 Mar 2020 11:22:15 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/english-teacher/</guid>
+      <description>我大学视听说英语老师，是一位大美女。但是我那时候不太能理解女人的魅力，所以只有今天回忆起来，才能明白自己的倾慕。老师气质很温和，我却又能体会到为师的肃穆；老师讲话不很大声，但是语音语调我现在还记得。
+我们的英语课分听说和读写两部分，老师是我听说课的老师。所以我们课上主要就是谈话，说一些故事里的话和故事外的话。我英语始终学得不太好，显然老师很轻松的发现了。老师也还发现我比较孤僻，于是问我的同学「你有没有觉得他（指我）有很多生活经历」？这个有关我的问题，老师没有问我，我也没听我同学的回答。
+我们的课程有种一分钟演讲，有次我的稿子是抄的，显然也被老师发现了。在演讲之后，老师对着全班用比较低的声音说，有个同学的的稿子有借鉴了其它资料，但是看得出他改了很多，付出了努力，所以老师接受了这件事。老师说话的时候没有对着我，所以我现在记得那个时候老师的侧脸。
+老师说她相信的人生的意义，就是 to experience（去经历）。老师作为我过去的经历，也就成了我人生的一部分。</description>
+    </item>
+    
+    <item>
+      <title>rm 的小故事</title>
+      <link>https://plus7wist.github.io/posts/rm/</link>
+      <pubDate>Tue, 17 Mar 2020 10:59:03 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/rm/</guid>
+      <description>当在一个空目录做这样的事情：
+touch ./-i a b c rm * 基本上，rm 会交互式的命令确认删除。这是因为 * 扩展把 -i（文件名）扩展到了 rm 的选项里面。而 -i 对 rm 来说，是打开交互式确认的选项。
+所以 bash 脚本里面不应该直接使用 * 来扩展文件名，至少要使用 ./*。
+这应该归咎于命令行工具对参数完全不做类型区分，广义上归属于进程之间消息传递的框架缺失。如果 rm 是一个函数，那么它的设计十分糟糕。它有八九个选项，选项之间有非常细微的区别。这就好像这样的函数声明：
+def rm(*file_list, **options): do_remove_file(file_list, options) 对于这种函数的重构，基本上是采取包装办法，将常用的选项组合提取出一组函数来，然后弃用 rm，这个过程中，既能淘汰不常用甚至本身无意义的参数组合，也能指导进一步重构。
+def rm_file(file_path): rm(file_path) def rm_recursive(file_or_dir): rm(file_or_dir, recursive=True) def rm_interactive(file_or_dir): rm(file_or_dir, interactive=True) 但是我们对这些函数都有 -f 的要求，还能要求它们能组合多个文件。这时候我们就需要重新抽象：-f 是应用在被删除对象上的，其它选项也类似。所以我们的做法可能是：
+class DeleteTarget: def __init__(self, target): self.target = target self.interactive_ = False self.force_ = False self.recursive_ = False def interactive(self, interactive): self.</description>
+    </item>
+    
+    <item>
+      <title>Journal 2020 01 21</title>
+      <link>https://plus7wist.github.io/posts/journal-2020-01-21/</link>
+      <pubDate>Tue, 21 Jan 2020 11:07:49 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2020-01-21/</guid>
+      <description>yamllint pacman -S yamllint yamllint changelog.yml  yq pacman -S yq  A jq wrapper for YAML.</description>
+    </item>
+    
+    <item>
+      <title>Journal 2019 12 31</title>
+      <link>https://plus7wist.github.io/posts/journal-2019-12-31/</link>
+      <pubDate>Tue, 31 Dec 2019 10:09:33 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2019-12-31/</guid>
+      <description>Rust - debug 条件编译 #[cfg(debug_assertions)] let log_level = LevelFilter::Info; #[cfg(not(debug_assertions))] let log_level = LevelFilter::Warn; 这东西老是忘。</description>
+    </item>
+    
+    <item>
+      <title>Journal 2019 12 30</title>
+      <link>https://plus7wist.github.io/posts/journal-2019-12-30/</link>
+      <pubDate>Mon, 30 Dec 2019 11:41:45 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2019-12-30/</guid>
+      <description>supervisor supervizord 读取 /etc/supervisord.conf，而它的最后有：
+[include] files = /etc/supervizor.d/*.ini 创建：/etc/supervisor.d/hugo.ini：
+[program:hugo] command=/usr/bin/hugo server directory=/home/plus7wist/desktop/plus7wist-blog user=plus7wist redirect_stderr=true 启动 supervisord，可以选择 root 权限，没有参数。
+supervisorctl help # 查看帮助 supervisorctl tail hugo # 查看 hugo 任务的输出 dart 字符串和整数转换 int x = int.parse(&amp;#34;123&amp;#34;); String s = 123.toString(); dart - logging import &amp;#39;package:logging/logging.dart&amp;#39; Logger log = new Logger(&amp;#39;cthulhu&amp;#39;); Logger.root.level = Level.INFO; Logger.root.onRecord.listen((rec) { print(&amp;#34;${rec.level}${rec.message}&amp;#34;); }); log.info(&amp;#34;ps aux&amp;#34;); dart - future Future&amp;lt;R&amp;gt; then( FutureOr&amp;lt;R&amp;gt; onValue(T value), { Function onError } ); // 当 future 不是 error  Future&amp;lt;R&amp;gt; catchError( Function onError, { bool test(Object error) } ); // 当 future 是 error  Future&amp;lt;T&amp;gt; whenComplete(FutureOr action()); // 完成了就执行 then 的 onValue 返回的是 FutureOr&amp;lt;R&amp;gt;，可以理解为 Future&amp;lt;R&amp;gt; 或者 R。也就是返回 R 的话，then 函数会自己包装成 Future&amp;lt;R&amp;gt;。</description>
+    </item>
+    
+    <item>
+      <title>Journal 2019 12 27</title>
+      <link>https://plus7wist.github.io/posts/journal-2019-12-27/</link>
+      <pubDate>Fri, 27 Dec 2019 11:28:47 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2019-12-27/</guid>
+      <description>Go - 变长参数函数 func Min(min int, args ...int) int { for _, v := range args { if v &amp;lt; min { min = v } } return min } func main() { var values = []int{1, 2, 3, 4} fmt.Println(Min(10, values...)) } 定义的时候，... 加在类型前面，调用的时候，... 加在类型后面。</description>
+    </item>
+    
+    <item>
+      <title>Journal 2019 12 26</title>
+      <link>https://plus7wist.github.io/posts/journal-2019-12-26/</link>
+      <pubDate>Thu, 26 Dec 2019 10:25:23 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2019-12-26/</guid>
+      <description>pacman -Q pacman -Ql jq # 查看 jq 包里有些什么内容 pacman -Qo /usr/bin/jq # 跟 -Ql 相反，查看一个文件是被哪个包安装上的 pacman -Qq # 查看所有本地包 pacman -Qqe # 查看 -Qq 里显式安装的包 pacman -Qqd # 查看 -Qq 因为被依赖而被安装的包 pacman -Qqdt # 查看 -Qqd 里，不再被依赖的包，一般可以删除这些包 pacman -Qqdt | pacman -Rs - pacman -Qi jq # 查看此包的详细信息 Rust - drop 时回收对象 我有个 IoBufferQueue，是个线程安全的队列。它可以提供一些 Box&amp;lt;[u8]&amp;gt;，作为 IO 的缓冲区。在用完了缓冲区之后再把缓冲区填回队列，这样其他的线程就可以复用这个缓冲区了。为了不要在函数返回的地方忘记回收缓冲区，我就用 RAII 的方式，写了一个 Handle：
+pub(crate) struct IoBufferHandle&amp;lt;&amp;#39;a&amp;gt; { pub buffer: Box&amp;lt;[u8]&amp;gt;, queue: &amp;amp;&amp;#39;a IoBufferQueue, } 我的期望当然是在实现 Drop，然后在 drop 里把 buffer 填回 queue 里。但是 drop 的签名是：</description>
+    </item>
+    
+    <item>
+      <title>Journal 2019 12 25</title>
+      <link>https://plus7wist.github.io/posts/journal-2019-12-25/</link>
+      <pubDate>Wed, 25 Dec 2019 10:50:34 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2019-12-25/</guid>
+      <description>powershell 环境变量 # 查看环境变量 ls env: # 输出环境变量 path 的值。Powershell 是大小写不敏感的 echo $env:path # 查看所有变量 ls variable: # 测试 name 变量是否存在 test-path variable:name # 测试环境变量 name 是否存在 test-path env:name haskell - ghc &amp;gt;&amp;gt;&amp;gt; pacman -S ghc ghc-static &amp;gt;&amp;gt;&amp;gt; cat hello.hs main = putStrLn &amp;quot;Hello, world&amp;quot; &amp;gt;&amp;gt;&amp;gt; ghc --make hello.hs [1 of 1] Compiling Main ( hello.hs, hello.o ) Linking hello ... &amp;gt;&amp;gt;&amp;gt; ls hello hello.hi hello.hs hello.o &amp;gt;&amp;gt;&amp;gt; ./hello Hello, world haskell - IO action ghci&amp;gt; :t getLine getLine :: IO String getLine 返回一个得到 String 的 IO action。用 name &amp;lt;- getLine 解开这个包，而 name = getLine，使得 name 获取了这个 IO action。</description>
+    </item>
+    
+    <item>
+      <title>Hugo 搭建 github page</title>
+      <link>https://plus7wist.github.io/posts/hugo/</link>
+      <pubDate>Tue, 24 Dec 2019 17:24:05 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/hugo/</guid>
+      <description>安装 hugo pacman -S hugo 生成站点 hugo new site plus7wist-hugo cd plus7wist-hugo/ 主要修改 config.toml。
+baseURL = &amp;#34;https://plus7wist.github.io/&amp;#34; languageCode = &amp;#34;zh-cn&amp;#34; title = &amp;#34;plus7wist&amp;#39;s blog&amp;#34; theme = &amp;#34;contrast&amp;#34; 注意 baseURL 得以 https 开头，而且得以 / 结尾。记得添加主题代码：
+[submodule &amp;quot;themes/contrast&amp;quot;] path = themes/contrast url = https://github.com/niklasbuschmann/contrast-hugo.git 写文章 生成文章：
+hugo new posts/journal.md 写完文章：
+hugo server # 开启本地博客服务 hugo # 在 public/ 生成站点 发布站点 主要把 public 发布在远端。
+#! /usr/bin/env bash  set -e hugo cd public git add .</description>
+    </item>
+    
+    <item>
+      <title>Journal 2019 12 19</title>
+      <link>https://plus7wist.github.io/posts/journal-2019-12-19/</link>
+      <pubDate>Thu, 19 Dec 2019 10:50:34 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2019-12-19/</guid>
+      <description>Ruby - Struct CliConf = Struct.new(:task, :tee) CliError = Struct.new(:error) conf = CliConf.new(:command, false) error = CliError.new(&amp;#39;Empty: empty task&amp;#39;) Struct 还能跟一个代码块，可以在里面加方法。
+Ruby - is_a? instance_of? Ruby 的对象有继承关系，例如字符串都是 String 类，String 类继承自 Object 类。所以，一个字符串是一个（is_a?）String，也是一个（is_a?） Object。又可以说一个字符串是 String 的实例（instance_of?），但是不是 Object 的实例。
+还有 kind_of?，跟 is_a? 是同一个意思。
+Ruby - rubocop 和 rofo 我本來以爲 rubocop 只是個靜態檢查工具，但是今天看了看，其實也是個格式化工具。 rufo 單獨是個格式化工具，而且它的方向傾向於變成一個 opinionated（固執己見的）格式化工具，也就是說越加不能配置格式化的結果。詳情見：https://github.com/ruby-formatter/rufo/issues/2。
+rubocop 有個 -a 選項，可以自動修改一些簡單的格式，這也是它作爲一個格式化工具的方法。
+Ruby - 切片 Ruby 數組的切片有兩種語法：a[start..end] 和 a[start...end]。區別在於前一種包括最後一個，後一種不包括。我不喜歡這種做法，因爲長得太像，實在記不住。
+還有省略內容 a[start..]，表示從 start 開始到末尾。但是這種語法好像是被遺棄了，現在的做法是 a[start..-1]。
+Graphviz 複習一下簡單的用法：</description>
+    </item>
+    
+    <item>
+      <title>Journal 2019 12 17</title>
+      <link>https://plus7wist.github.io/posts/journal-2019-12-17/</link>
+      <pubDate>Tue, 17 Dec 2019 10:50:34 +0800</pubDate>
+      
+      <guid>https://plus7wist.github.io/posts/journal-2019-12-17/</guid>
+      <description>Rufo Ruby 的代码格式化工具。应该是 Ruby Formatter 的简称。
+gem install rufo rufo &amp;lt;file&amp;gt; rufo &amp;lt;dir&amp;gt; Rubocop Ruby 代码的风格检查工具。
+gem install rubocop rubocop rubocop &amp;lt;file&amp;gt; rubocop &amp;lt;dir&amp;gt; config-rs https://github.com/mehcode/config-rs
+Rust 配置文件解读工具。很多时候需要多层的配置结合起来，而且为不同的字段设计默认值。只用某种结构化数据格式要完成完整的配置需要还是需要很多工作的。
+impl Settings { pub fn new() -&amp;gt; Result&amp;lt;Self, ConfigError&amp;gt; { let mut s = Config::new(); s.merge(File::with_name(&amp;#34;config/default&amp;#34;))?; s.merge(Environment::with_prefix(&amp;#34;app&amp;#34;))?; s.set(&amp;#34;database.url&amp;#34;, &amp;#34;postgres://&amp;#34;)?; s.try_into() } } Ruby - Open3 require &amp;#39;open3&amp;#39; def run_cmd(cmds) Open3.popen2(*cmds) { |stdin_pipe, stdout_pipe| // } Open3.open2e(*cmds) { |stdin_pipe, stdouterr_pipe| // } Open3.open3(*cmds) { |stdin_pipe, stdout_pipe, stderr_pipe| // } end ShellCheck pacman -S shellcheck shellcheck &amp;lt;script.</description>
+    </item>
+    
+  </channel>
+</rss>

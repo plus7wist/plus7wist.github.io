@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <title>Journal 2019 12 19 // plus7wist&#39;s blog</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="plus7wist" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://plus7wist.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Journal 2019 12 19"/>
+<meta name="twitter:description" content="Ruby - Struct CliConf = Struct.new(:task, :tee) CliError = Struct.new(:error) conf = CliConf.new(:command, false) error = CliError.new(&#39;Empty: empty task&#39;) Struct 还能跟一个代码块，可以在里面加方法。
+Ruby - is_a? instance_of? Ruby 的对象有继承关系，例如字符串都是 String 类，String 类继承自 Object 类。所以，一个字符串是一个（is_a?）String，也是一个（is_a?） Object。又可以说一个字符串是 String 的实例（instance_of?），但是不是 Object 的实例。
+还有 kind_of?，跟 is_a? 是同一个意思。
+Ruby - rubocop 和 rofo 我本來以爲 rubocop 只是個靜態檢查工具，但是今天看了看，其實也是個格式化工具。 rufo 單獨是個格式化工具，而且它的方向傾向於變成一個 opinionated（固執己見的）格式化工具，也就是說越加不能配置格式化的結果。詳情見：https://github.com/ruby-formatter/rufo/issues/2。
+rubocop 有個 -a 選項，可以自動修改一些簡單的格式，這也是它作爲一個格式化工具的方法。
+Ruby - 切片 Ruby 數組的切片有兩種語法：a[start..end] 和 a[start...end]。區別在於前一種包括最後一個，後一種不包括。我不喜歡這種做法，因爲長得太像，實在記不住。
+還有省略內容 a[start..]，表示從 start 開始到末尾。但是這種語法好像是被遺棄了，現在的做法是 a[start..-1]。
+Graphviz 複習一下簡單的用法："/>
+
+    <meta property="og:title" content="Journal 2019 12 19" />
+<meta property="og:description" content="Ruby - Struct CliConf = Struct.new(:task, :tee) CliError = Struct.new(:error) conf = CliConf.new(:command, false) error = CliError.new(&#39;Empty: empty task&#39;) Struct 还能跟一个代码块，可以在里面加方法。
+Ruby - is_a? instance_of? Ruby 的对象有继承关系，例如字符串都是 String 类，String 类继承自 Object 类。所以，一个字符串是一个（is_a?）String，也是一个（is_a?） Object。又可以说一个字符串是 String 的实例（instance_of?），但是不是 Object 的实例。
+还有 kind_of?，跟 is_a? 是同一个意思。
+Ruby - rubocop 和 rofo 我本來以爲 rubocop 只是個靜態檢查工具，但是今天看了看，其實也是個格式化工具。 rufo 單獨是個格式化工具，而且它的方向傾向於變成一個 opinionated（固執己見的）格式化工具，也就是說越加不能配置格式化的結果。詳情見：https://github.com/ruby-formatter/rufo/issues/2。
+rubocop 有個 -a 選項，可以自動修改一些簡單的格式，這也是它作爲一個格式化工具的方法。
+Ruby - 切片 Ruby 數組的切片有兩種語法：a[start..end] 和 a[start...end]。區別在於前一種包括最後一個，後一種不包括。我不喜歡這種做法，因爲長得太像，實在記不住。
+還有省略內容 a[start..]，表示從 start 開始到末尾。但是這種語法好像是被遺棄了，現在的做法是 a[start..-1]。
+Graphviz 複習一下簡單的用法：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://plus7wist.github.io/posts/journal-2019-12-19/" />
+<meta property="article:published_time" content="2019-12-19T10:50:34+08:00" />
+<meta property="article:modified_time" content="2019-12-19T10:50:34+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://plus7wist.github.io/"><img class="app-header-avatar" src="/images/avatar.jpg" alt="plus7wist" /></a>
+      <h1>plus7wist&#39;s blog</h1>
+      <p>Ph&#39;nglui mglw&#39;nafh Cthulhu R&#39;lyeh wgah&#39;nagl fhtagn</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/plus7wist" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Journal 2019 12 19</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 19, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://plus7wist.github.io/tags/journal/">journal</a></div></div>
+    </header>
+    <div class="post-content">
+      <h2 id="ruby---struct">Ruby - Struct</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">CliConf</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">Struct</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">:task</span>, <span style="color:#e6db74">:tee</span>)
+<span style="color:#66d9ef">CliError</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">Struct</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">:error</span>)
+
+conf <span style="color:#f92672">=</span> <span style="color:#66d9ef">CliConf</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">:command</span>, <span style="color:#66d9ef">false</span>)
+error <span style="color:#f92672">=</span> <span style="color:#66d9ef">CliError</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#39;Empty: empty task&#39;</span>)
+</code></pre></div><p>Struct 还能跟一个代码块，可以在里面加方法。</p>
+<h2 id="ruby---is_a-instance_of">Ruby - <code>is_a?</code> <code>instance_of?</code></h2>
+<p>Ruby 的对象有继承关系，例如字符串都是 <code>String</code> 类，<code>String</code> 类继承自 <code>Object</code> 类。所以，一个字符串是一个（<code>is_a?</code>）<code>String</code>，也是一个（<code>is_a?</code>） <code>Object</code>。又可以说一个字符串是 <code>String</code> 的实例（<code>instance_of?</code>），但是不是 <code>Object</code> 的实例。</p>
+<p>还有 <code>kind_of?</code>，跟 <code>is_a?</code> 是同一个意思。</p>
+<h2 id="ruby---rubocop-和-rofo">Ruby - rubocop 和 rofo</h2>
+<p>我本來以爲 rubocop 只是個靜態檢查工具，但是今天看了看，其實也是個格式化工具。 rufo 單獨是個格式化工具，而且它的方向傾向於變成一個 opinionated（固執己見的）格式化工具，也就是說越加不能配置格式化的結果。詳情見：https://github.com/ruby-formatter/rufo/issues/2。</p>
+<p>rubocop 有個 <code>-a</code> 選項，可以自動修改一些簡單的格式，這也是它作爲一個格式化工具的方法。</p>
+<h2 id="ruby---切片">Ruby - 切片</h2>
+<p>Ruby 數組的切片有兩種語法：<code>a[start..end]</code> 和 <code>a[start...end]</code>。區別在於前一種包括最後一個，後一種不包括。我不喜歡這種做法，因爲長得太像，實在記不住。</p>
+<p>還有省略內容 <code>a[start..]</code>，表示從 <code>start</code> 開始到末尾。但是這種語法好像是被遺棄了，現在的做法是 <code>a[start..-1]</code>。</p>
+<h2 id="graphviz">Graphviz</h2>
+<p>複習一下簡單的用法：</p>
+<pre><code class="language-graphviz" data-lang="graphviz">Graph {
+    alice[label=&quot;Alice and Bob&quot;]
+    cthulhu[label=&quot;The Call of Cthulhu&quot;]
+
+    alice -- cthulhu
+}
+</code></pre><h2 id="ruby---多行註釋">Ruby - 多行註釋</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e">=begin
+</span><span style="color:#75715e">註釋內容。
+</span><span style="color:#75715e">=end</span>
+</code></pre></div><h2 id="ruby---rdoc">Ruby - rdoc</h2>
+<pre><code>pacman -S ruby-docs
+pacman -S ruby-rdoc
+
+ri Time
+</code></pre>
+<h2 id="ruby---toml">Ruby - toml</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;toml&#39;</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse_toml</span>(text)
+    parser <span style="color:#f92672">=</span> <span style="color:#66d9ef">TOML</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Parser</span><span style="color:#f92672">.</span>new text
+    parser<span style="color:#f92672">.</span>parsed
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_toml</span>(data)
+    generator <span style="color:#f92672">=</span> <span style="color:#66d9ef">TOML</span><span style="color:#f92672">::</span>genrator<span style="color:#f92672">.</span>new data
+    generator<span style="color:#f92672">.</span>body
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="ruby---unix-時間戳">Ruby - unix 時間戳</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;date&#39;</span>
+
+s <span style="color:#f92672">=</span> <span style="color:#66d9ef">Time</span><span style="color:#f92672">.</span>now<span style="color:#f92672">.</span>to_datetime<span style="color:#f92672">.</span>strftime <span style="color:#e6db74">&#39;%s&#39;</span>
+s<span style="color:#f92672">.</span>to_i
+</code></pre></div>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
