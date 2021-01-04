@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <title>何时下班？</title>
+
+    <style type="text/css">
+      code {
+        white-space: pre;
+      }
+
+      .content {
+        width: 80%;
+        margin: auto;
+      }
+
+      #one-day {
+        width: 100%;
+        margin: auto;
+        height: 60px;
+      }
+
+      .block-name {
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      h1 {
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      .block {
+        position: relative;
+        margin: auto;
+        float: left;
+        border-radius: 10px;
+        height: 100%;
+      }
+
+      .block::before {
+        position: absolute;
+        transform: translateX(-50%);
+        top: 100%;
+        white-space: nowrap;
+      }
+
+      #start {
+        background: #999;
+        width: 12.5%;
+      }
+
+      #start::before {
+        content: "8:30 a.m.";
+      }
+
+      #forenoon {
+        background: #ccc;
+        width: 20.8%;
+      }
+
+      #forenoon::before {
+        content: "10:00 a.m.";
+      }
+
+      #noon {
+        background: #999;
+        width: 12.5%;
+      }
+
+      #noon::before {
+        content: "12:30 p.m.";
+      }
+
+      #afternoon {
+        background: #ccc;
+        width: 33.3%;
+      }
+
+      #afternoon::before {
+        content: "2:00 p.m.";
+      }
+
+      #dinner {
+        background: #999;
+        width: 8.33%;
+      }
+
+      #dinner::before {
+        content: "6:00 p.m.";
+      }
+
+      #night {
+        background: #ccc;
+        width: 12.5%;
+      }
+
+      #night::before {
+        content: "7:00 p.m.";
+      }
+
+      #end {
+        background: #999;
+        width: 0%;
+      }
+
+      #end::before {
+        content: "8:30 p.m.";
+      }
+
+      #start-point,
+      #end-point {
+        position: absolute;
+        transform: translate(-50%, -100%);
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="content">
+      <h1>何时下班？</h1>
+
+      <div id="one-day">
+        <div class="block" id="start">
+          <span id="start-point">O</span>
+          <p class="block-name">上班</p>
+        </div>
+        <div class="block" id="forenoon">
+          <p class="block-name">上午</p>
+        </div>
+        <div class="block" id="noon">
+          <p class="block-name">午休</p>
+        </div>
+        <div class="block" id="afternoon">
+          <p class="block-name">下午</p>
+        </div>
+        <div class="block" id="dinner">
+          <p class="block-name">晚饭</p>
+        </div>
+        <div class="block" id="night">
+          <span id="end-point">X</span>
+          <p class="block-name">晚上</p>
+        </div>
+        <div class="block" id="end"></div>
+      </div>
+
+      <br />
+
+      <p>
+        上班时间：上午 <span id="start-hour">8</span> 点
+        <span id="start-minute">30</span> 分
+      </p>
+      <p>
+        下班时间：晚上 <span id="end-hour">7</span> 点
+        <span id="end-minute">0</span> 分
+      </p>
+    </div>
+  </body>
+
+  <script type="text/javascript" src="when-to-off.js"></script>
+</html>
