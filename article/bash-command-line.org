@@ -1,0 +1,119 @@
+---
+title: "Bash 命令行参数"
+date: 2020-05-20T09:39:56+08:00
+draft: true
+---
+
+* 任务
+
+任何命令行程序，都需要解决传递参数的问题。它可以看作是程序初始化的步骤，也可以看作是程序开始之前，其他程序或者终端会话到命令行程序的的一次通信。而 Shell 本身作为 Unix 类系统中，程序之间的粘合剂，天然具有这样的应用场景，这篇文章就描述这种场景的开发。
+
+这篇文章解释 Bash 特性，它们多数都是 POSIX 兼容的，所以可以用在其他 Shell 场景。
+
+* 简单的位置参数
+
+Bash 的位置参数，在外函数场景中，指向的就是命令行参数。具体来说，$1 指向第一个命令行参数，$2 指向第二个命令行参数。当然这时就要注意 Bash 在函数调用过程中用修改和恢复位置参数来模拟形式参数和实际参数的机制，不可在这些环境误用了位置参数。
+
+#+BEGIN_SRC bash
+#! /usr/bin/env bash
+
+echo "1st command line argument: $1"
+echo "2nd command line argument: $2"
+
+some_function() {
+	echo "1st function argument: $1"
+	echo "2nd function argument: $2"
+}
+
+some_function 1st 2nd
+#+END_SRC
+
+直接使用它，就可以完成简单的命令行工具开发。但这样的程序距离有一定的复用性还有很长的距离。
+
+* 帮助信息
+
+一个突出的问题是，如何帮助使用的人来知道如何使用命令行参数。人不能跨过一条河流两次，所以这里说的对命令行工具一无所知的人，甚至可能是未来的作者自己。
+
+通用的办法是在命令行参数错误，或者参数提示要查询使用方法的地方打印帮助。一般常用的方法是使用 here doc。
+
+#+BEGIN_SRC bash
+# show_help PROGRAM_NAME
+show_help() {
+	cat <<-EOF
+	usage:
+	  $0 [OPTION]... LAST
+	  $0 [OPTION]... FIRST LAST
+	  $0 [OPTION]... FIRST INCREMENT LAST
+	options:
+	  -f --format=FORAMT     use printf style floating-point FORMAT
+	  -s --separator=STRING  use STRING to separate numbers (default: \n)
+	  -w --equal-width       equalize width by padding with leading zeroes
+	     --help              display this help and exit
+	     --version           output version infomation and exit
+	EOF
+}
+#+END_SRC
+
+使用这种方法是我最喜欢的方法，但你要非常注意空格和制表符号。注意语法块的缩进都是制表符，而用法字符串里的缩进都是空格，例如 -w 前面是一个制表符和两个空格。这样做的原因是这种格式的 here doc 会删除每行前的制表符。
+
+所以我在写 bash 脚本的时候都是将编辑器配置成使用制表符缩进的。读者你可能不喜欢这种做法，那你就得放弃我这种实践了——作为前 Emacs 程序员，我其实挺习惯这种做法。
+
+* 参数数目错误
+
+在只使用一个或两个参数的场景里，只检查参数数目就完全可以完成“命令行参数解析”了。Bash 的特殊参数 $# 会扩展成位置参数的数目，而位置参数和命令行参数的关系前文已经说过了。这时我们的处理代码也很简单：
+
+#+BEGIN_SRC bash
+#! /usr/bin/env bash
+
+if [ $# -ne 1 ]; then
+	{ echo 'ERROR, need arguments'; show_help; } 1>&2
+	exit 1
+fi
+#+END_SRC
+
+* 对称的多个参数
+
+使用多个参数的时候，命令行参数解析就会变得复杂。但是有一种例外，也就是虽然需要很多参数，但是参数都是对称的，不需要对每个参数单独处理。典型的例子就是每个参数指向一个文件路径。这时我们就需要一种遍历命令行参数的方法。一般来说 Bash 内建命令的 shift 可以完成这个任务。
+
+#+BEGIN_SRC bash
+while [ $# -ge 0 ]; do
+	process_file "$1"
+	shift
+done
+#+END_SRC
+
+或者可以利用 shift 的返回值来做这件事：
+
+#+BEGIN_SRC bash
+while each_argument="$1" && shift; do
+	process_file "$each_argument"
+done
+#+END_SRC
+
+这时的错误处理依然是参数数目错误的处理方法而已。
+
+* IO 作为参数
+
+“没有参数也是一种参数”，特别能用在 IO 任务里。标准输入流表示的是输入文件，标准输出流表示的是输出文件。
+
+* 环境变量方法
+
+环境变量可以被程序读取，而影响它的行为。多用在修改配置位置等跟部署有关，但是跟任务无关的情况下。
+
+#+BEGIN_SRC bash
+env GPG_PATH ./task.sh
+#+END_SRC
+
+在脚本里，用一些特别的变量替换方法来取用这些环境变量。
+
+#+BEGIN_SRC bash
+gpg=${GPG_PATH:-gpg}
+#+END_SRC
+
+* UNIX/GNU 风格
+
+* 使用 getopts/getopt
+
+* 检查错误
+
+* 使用其他库
