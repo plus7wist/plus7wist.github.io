@@ -1,3 +1,27 @@
+## 2021/01/09 23:48:33 六
+
+我今天看了一个视频（BV1T5411p7ax），作者半开玩笑的发明了 English SE：
+
+- 取消单词的复数形式：
+
+  - I have one apple.
+  - I have two apple.
+
+- 取消第三人称单数形式：
+
+  - He have a dog.
+  - I have a dog.
+
+- 所有的过去式和过去分词都统一为后缀 ed：
+
+  - I have eated egg.
+
+- 增加表示方位的介词 lo，在没有歧义的情况下代表 in/on/at。
+
+  - I am lo the park.
+
+我觉得太棒了。
+
 ## 2021/01/05 12:00:05 二
 
 今天切换到了 awesome wm，参照 Arch Wiki 来安装和配置，没有什么痛苦。也参照它写好了启动脚本。
