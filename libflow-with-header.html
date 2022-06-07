@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>word-list - 家中古词.zst</title>
+        <title>libflow-with-header - 家中古词.zst</title>
         
         
 
@@ -93,7 +93,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">table of content</a></li><li class="chapter-item expanded affix "><li class="part-title">Note</li><li class="chapter-item expanded "><a href="toki-pona-dict.html">toki-pona-dict</a></li><li class="chapter-item expanded "><a href="codewars-is-prime.html">codevars-is-prime</a></li><li class="chapter-item expanded "><a href="ssh-rsa.html">ssh-rsa</a></li><li class="chapter-item expanded "><a href="cmake-cheatsheet.html">cmake-cheatsheet</a></li><li class="chapter-item expanded "><a href="cpp11-call-once-throw-error.html">cpp11-call-once-throw-error</a></li><li class="chapter-item expanded "><a href="cryptsetup.html">cryptsetup</a></li><li class="chapter-item expanded "><div>leveldb</div></li><li class="chapter-item expanded "><a href="micro-editor.html">micro-editor</a></li><li class="chapter-item expanded "><a href="packages.html">packages</a></li><li class="chapter-item expanded "><a href="pip-find-local-archives.html">pip-find-local-archives</a></li><li class="chapter-item expanded "><a href="rst-tools.html">rst-tools</a></li><li class="chapter-item expanded "><div>rust-deref</div></li><li class="chapter-item expanded "><a href="rust-getopt.html">rust-getopt</a></li><li class="chapter-item expanded "><a href="switchy-omega-auto-switch.html">switchy-omega-auto-switch</a></li><li class="chapter-item expanded "><a href="systemd-template.html">systemd-template</a></li><li class="chapter-item expanded "><a href="tar-backup.html">tar-backup</a></li><li class="chapter-item expanded "><a href="word-list.html" class="active">word-list</a></li><li class="chapter-item expanded "><a href="zola-blog.html">zola-blog</a></li><li class="chapter-item expanded "><a href="note.html">note</a></li><li class="chapter-item expanded "><a href="ssh-key-password.html">ssh-key-password</a></li><li class="chapter-item expanded "><a href="libflow-with-header.html">libflow-with-header</a></li><li class="chapter-item expanded affix "><li class="part-title">Journal</li><li class="chapter-item expanded "><div>2022</div></li><li class="chapter-item expanded "><div>2021</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">table of content</a></li><li class="chapter-item expanded affix "><li class="part-title">Note</li><li class="chapter-item expanded "><a href="toki-pona-dict.html">toki-pona-dict</a></li><li class="chapter-item expanded "><a href="codewars-is-prime.html">codevars-is-prime</a></li><li class="chapter-item expanded "><a href="ssh-rsa.html">ssh-rsa</a></li><li class="chapter-item expanded "><a href="cmake-cheatsheet.html">cmake-cheatsheet</a></li><li class="chapter-item expanded "><a href="cpp11-call-once-throw-error.html">cpp11-call-once-throw-error</a></li><li class="chapter-item expanded "><a href="cryptsetup.html">cryptsetup</a></li><li class="chapter-item expanded "><div>leveldb</div></li><li class="chapter-item expanded "><a href="micro-editor.html">micro-editor</a></li><li class="chapter-item expanded "><a href="packages.html">packages</a></li><li class="chapter-item expanded "><a href="pip-find-local-archives.html">pip-find-local-archives</a></li><li class="chapter-item expanded "><a href="rst-tools.html">rst-tools</a></li><li class="chapter-item expanded "><div>rust-deref</div></li><li class="chapter-item expanded "><a href="rust-getopt.html">rust-getopt</a></li><li class="chapter-item expanded "><a href="switchy-omega-auto-switch.html">switchy-omega-auto-switch</a></li><li class="chapter-item expanded "><a href="systemd-template.html">systemd-template</a></li><li class="chapter-item expanded "><a href="tar-backup.html">tar-backup</a></li><li class="chapter-item expanded "><a href="word-list.html">word-list</a></li><li class="chapter-item expanded "><a href="zola-blog.html">zola-blog</a></li><li class="chapter-item expanded "><a href="note.html">note</a></li><li class="chapter-item expanded "><a href="ssh-key-password.html">ssh-key-password</a></li><li class="chapter-item expanded "><a href="libflow-with-header.html" class="active">libflow-with-header</a></li><li class="chapter-item expanded affix "><li class="part-title">Journal</li><li class="chapter-item expanded "><div>2022</div></li><li class="chapter-item expanded "><div>2021</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,45 +163,84 @@
 
                 <div id="content" class="content">
                     <main>
-                        <ul>
-<li>
-<p>menace</p>
+                        <h1 id="发送带头部信息的-libflow-消息包"><a class="header" href="#发送带头部信息的-libflow-消息包">发送带头部信息的 libflow 消息包</a></h1>
+<h2 id="背景"><a class="header" href="#背景">背景</a></h2>
+<p>libflow 是 zhangqi@minieye.cc 撰写的 IPC 库，基于 websocket 协议。广泛用于我司
+传感器数据发送。它的消息格式是 MessagePack，具体来说是包含下列字段的 MessagePack map。</p>
 <ul>
-<li>n. 威胁，危险的人物。</li>
-<li>v. （正式）威胁，威吓。</li>
-<li>nethack - Exploring The Mezes of Menace</li>
+<li>time：发送时间。</li>
+<li>source：发送者。</li>
+<li>topic：消息主题。</li>
+<li>data：用户数据。</li>
 </ul>
-</li>
-<li>
-<p>dungeon</p>
+<p>libflow 将上述数据打包成 map，作为 websocket 协议的 Binary 数据发送给订阅者。</p>
+<p>在较高版本的 libflow 中，支持设置 sender.serialize 为 raw，这会改变发送时的行为
+，只把用户数据作为 websocket Binary 数据发出，而不是 MessagePack 包。</p>
+<h2 id="在-libflow-协议基础上增加头信息"><a class="header" href="#在-libflow-协议基础上增加头信息">在 libflow 协议基础上增加头信息</a></h2>
+<p>当发送的用户数据是带有头信息的，例如：</p>
 <ul>
-<li>n. 土牢，地牢。</li>
-<li>Dungeons &amp; Dragons (TM) 龙与地下城</li>
+<li>gtc_tick: 消息对应的传感器时间，单调时钟，从 EPOCH 开始的微秒数，64 位无符号整数。</li>
+<li>utc_tick：消息对应的传感器时间，实时时钟，从 EPOCH 开始的微秒数，64 位无符号整数。</li>
 </ul>
-</li>
-<li>
-<p>amulet</p>
+<p>此外还有消息的「本体」，例如用 protobuf 序列化的某个 protobuf 消息。这种情况下
+，平凡的做法是将消息本体和头信息用 MessagePack 打包在一起，即打包下列的 MessagePack map：</p>
 <ul>
-<li>n. 护身符，辟邪的物品。</li>
-<li>Amulet of Yendor</li>
+<li>gtc_tick</li>
+<li>utc_tick</li>
+<li>data</li>
 </ul>
-</li>
+<p>再将此数据传递给 libflow 的发送接口（默认协议）。从而发出的消息具有这样的结构：</p>
+<pre><code>&lt;Websocket Binary&gt;
+  &lt;MessagePack Map&gt;
+    time
+    source
+    topic
+    data
+      &lt;MessagePack Map&gt;
+        gtc_tick
+        utc_tick
+        data &lt;Protobuf&gt;
+</code></pre>
+<p>《传感器发送协议220428》中的第一节将此称作「规范2」。</p>
+<h2 id="扩展-libflow-默认协议增加头信息"><a class="header" href="#扩展-libflow-默认协议增加头信息">扩展 libflow 默认协议增加头信息</a></h2>
+<p>上述方案，逻辑上使用者需要解开 websocket Binary 中的 MessagePack 包，再将 data
+部分作为 MessagePack 解开包，虽然技术上因为 MessagePack 的递归特性可以省去一次
+解包，但需要特定的实现来做这件事。</p>
+<p>此外，假设从无头部信息的数据开始迭代，这可能导致相关工具发生 breaking 变动。</p>
+<p>因此感知组使用另一种方法。在原则上使用 libflow 的 raw 协议，也就要求较高的
+libflow 版本。模拟 libflow 默认协议，并增加 extra 部分。</p>
+<ul>
+<li>time：发送时间。</li>
+<li>source：发送者。</li>
+<li>topic：消息主题。</li>
+<li>data：用户数据。</li>
+<li>extra：任意 MessagePack 数据。</li>
 </ul>
+<p>按照上例，gtc_tick 和 utc_tick 是 MessagePack map，即发出数据有这样的格式：</p>
+<pre><code>&lt;Websocket Binary&gt;
+  &lt;MessagePack Map&gt;
+    time
+    source
+    topic
+    extra
+      gtc_tick
+      utc_tick
+    data &lt;Protobuf&gt;
+</code></pre>
+<p>它因此可以骗过下游，让下游认为这个消息还是 libflow 默认协议（只要不解析 extra
+部分）。</p>
+<p>《传感器发送协议220428》中的第一节将此称作「规范1」。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="tar-backup.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="ssh-key-password.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="zola-blog.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -211,15 +250,11 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="tar-backup.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="ssh-key-password.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="zola-blog.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
