@@ -1,0 +1,336 @@
+# 笔记
+
+## 2022年 06月 09日 星期四 09:38:28 CST
+
+问题：升级 MCU 之后。
+  sim 不能启动，提示 RM 初始化失败。
+  object 不能启动，提示 acl 初始化失败。
+原因：/opt/app/1/runtime_service/ 下有不能被 EM 拉起的服务。导致了 RM 有关服务启动失败。
+解决：删除上目录下的文件，重启。
+
+问题：MDC 的 NN 设置组失效。
+原因：模型使用的组是加载模型时决定的，而原有代码在加载模型后设置组。
+解决：在加载模型之前设置组。
+
+问题：升级 MCU 后，rtfbag 发出的数据无法被 data_dev_tool 解码转发。
+
+## Myfonts
+
+- https://www.myfonts.com
+- plus7wist
+- jiazhongguci@foxmail.com
+- zhangshiquan10.
+
+## Jenkins for obeject-perception
+
+- 192.168.50.69
+- builder
+- vehicle555dev
+
+## TODO
+
+- [ ] MDC h1z fault
+- [ ] MDC nn forword speed, first run is slow
+- [ ] MDC RM register failed 
+- [ ] MDC ROI change
+- [ ] MDC car rear light classifcation network
+- [ ] MDC delay test and tunning
+
+## 2022年 06月 02日 星期四 17:59:03 CST
+
+MDC 测速的问题。
+
+- 有预热。第一次运行耗时很多。
+- 1 核的组和 3 核的组表现一样。
+
+## 2022年 05月 31日 星期二 08:48:46 CST
+
+昨天上午看了一下 SCP-CN，「魅力香水」的故事很好看。然后调查了一下 TSR 的漏检，
+发现是 trace 的 traceSmooth 逻辑删除了小标牌。定位问题的过程中我发现多个 V 合并
+在一起工作让定位问题非常困难，需要打开线程名称过滤日志，关闭不用的摄像头对于定
+位问题是有帮助的。
+
+还编译安装了 python，终于不用忍受旧版本的 python 了，这次我打开了之前没有打开过
+的 --enable-lto 选项。
+
+今天要测试 ADSFI 的 Fault 接口。
+
+## 2022年 05月 27日 星期五 20:32:17 CST
+
+我用上了 https://dtinth.github.io/comic-mono-font/
+
+## Wed. 05-25
+
+- 就 MDC 加速器预热的问题咨询华为的工程师。
+- 调查 TSR 漏检问题。
+- ADSFI 的错误上报测试。
+
+## Tue. 05-24
+
+- Fix crash (maybe exists) in object-perception.
+- Talks about timing problem with L. Jj. 
+- Make a test for fault interface.
+
+## ubuntu 中的 dwm 冒险
+
+用 apt 安装它，看一看 man 手册，Mod1-Shift-Return 是打开终端，Mod1-[1-9] 是切换
+桌面。
+
+安装完成之后在登录管理器里选择 dwm。上面发现了小小的导航栏之后就是启动成功了。
+但是因为没有桌面，所以其他部分看起来还是登录页面的样子。
+
+再有问题就是它实在太卡，不知道是什么原因。
+
+## supervisord
+
+In program:x section, set stopsignal to KILL if program is hard to die.
+
+Number of SIGKILL is 9.
+
+## 梯子网站
+
+- https://tly.com/zh/
+- jiazhongguci@foxmail.com
+- zsq261917
+
+## patchelf
+
+Command "patchelf“ can set soname of a elf-file:
+
+    patchelf --set-soname SONAME ELF
+
+patchelf with old version may break ELF file. Try install it with pip.
+
+## Tue. 2022/05/17
+
+- Work in OBJECT-PERCEPTION-PORT.
+  - integration of OBJ-CNN
+  - testing
+  - publish
+
+## Mon. 2022/05/16
+
+- Publish OBJ-CNN 0.20.9 to support big traffic sign classifcation.
+- Work in OBJECT-PERCEPTION-PORT
+  - integration
+  - fix bug in camera frame report.
+  - update OBJ-CNN image loader interface to fit different loaders.
+- Interview.
+
+## Talk with devin
+
+- object-perception-port design, task and tools
+- common repo
+
+## Backup with dd and gzip
+
+    sudo dd if=/dev/sdc1 status=progress | gzip > out.gz
+
+## Toki Pona
+
+Toki means good, Pona means language in Toki Pona.
+
+Alphabets:
+
+* vowel: aeiou
+* consonant: jklmnpstw
+
+Each syllable structure are of the form (C)V(n). C is a optional consonant, v
+is a vowel, n is option final nasal.
+
+## Mon. 2022/05/09
+
+mi:
+  - Toki Pona dict.
+  - Lift control.
+
+pali:
+  - OA report.
+  - Test MDC ihc and detection model.
+  - Work on object-perception-reader with H1Z-ADSFI.
+
+## Sat. 2022/05/07
+
+Today is work day.
+
+- MDC detection model
+- Work on object-perception-reader
+- Hand on IHC detection model.
+  - New model with only one stride.
+
+## TODO
+
+Makes DataBuffer fatal in case if old data not poped.
+
+## Fri. 2022/05/06
+
+- Release MDC package.
+- H1Z-ADSFI
+  - Fix crash of node sample.
+  - Work on object-perception-reader
+- Something woring with mdc detection model. Check it out.
+
+## atuin
+
+*atuin* is a bash history command search tool. After install it, you Ctrl-R
+(search history in bash) will works better.
+
+*atuin sync* will synchronize your local history with remote data. You can
+setup a personal server with *atuin server* or just use atuin default server,
+which is free.
+
+atuin depends on *preexec* tool.
+
+## ssh-add
+
+*ssh-add -k ~/.ssh/id_rsa* will add my password protected key into keychain.
+
+I can't understand it now.
+
+## Ruste
+
+Ruste and other macro based template engines in Rust is not flexiable because
+it depends on Rust compiler in in general template task, but in specific task
+like generate personal website, that cons is acceptable.
+
+## Thu. 2022/05/05
+
+Back to work.
+
+- Working on ADSFI-2:
+  - Create details redmine.
+  - Run demo, but crash.
+  - Talk about ArgProcess async IO with Huo Jianyu.
+
+## Lisp and C
+
+C like program can also be presented by S-expression too, I think.
+
+Just treat `{ ...; ...;  }` as a syntax sugar for `(begin .. ..)`.
+
+    (define (name argument)
+        ())
+
+    fn name argument {
+        let a 10;
+        let b 11;
+        (+ a b)
+    }
+
+## Clang-Format 局部关闭格式化
+
+有些时候手动改动的缩进是有语义的，不希望用 clang-format 改变，这时可以用::
+
+    // clang-format off
+    /* Some Code.
+    With good style. */
+    // clang-format on
+
+## Bash -s test
+
+test command in bash with option -s and a file path will check if this file is
+exists and not empty:
+
+    test -s $FILE
+
+## Curl
+
+-fsSL is a useful options combination for curl, if you want to execute a remote
+script by pipe. Just like:
+
+    curl -fsSL "$URL" | bash
+
+-f is short for --fail, means return non-zero(22) after HTTP request is not ok.
+-s is short for --slient, means don't show progress and error infomation. -S is
+--show-error this will cancel the suppression of error infomation in -s. -L is
+short for --location, means re-send request if HTTP response says that target
+resource is moved.
+
+-sS is a useful option group for disable progress bar.
+
+https://paste.rs 服务：
+
+    curl --data-binary @plain.txt https://paste.rs
+    echo "Hello" | curl --data-binary @- https://paste.rs
+    curl -X DELETE "https://paste.rs/$ID"
+
+--data-binary  指定二进制数据为请求的 Body 部分。用 @ 后跟文件名的方式要求 curl 读取文件，用 @- 要求 curl 读取标准输入。
+
+```
+-X method      指定 HTTP 方法，不指定时为 GET。
+```
+
+## gpg 百度盘
+
+`gpg/plus7wist-gpg.txt` 是密码保护的私钥。下载导入：
+
+    gpg --import plus7wist-gpg.txt
+    # 输入密码
+
+
+## ffmpeg
+
+### 合并视频
+
+保存文件 filelist.txt，包含：
+
+    file 'input1.mkv'
+    file 'input2.mkv'
+    file 'input3.mkv'
+
+再使用命令：
+
+    ffmpeg -f concat -i filelist.txt -c copy output.mkv
+
+这样就将 inpu1.mkv、input2.mkv 和 input3.mkv 合并成 output.mkv。
+
+## Vim
+
+设置括号匹配颜色，在色彩终端里，背景是当前背景，前景是浅蓝：
+
+    hi MatchParan ctermbg=bg ctermfg=lightblue
+
+## C++
+
+子类（`D`) 要想调用父类（`B`）的函数（`f`)，而且 `D` 重写或者重载了 `f`，那么子类定义里直接调用 `f` 会选择子类里的实现。要选择父类的实现，需要用 `B::f` 这种格式。
+
+## Git
+
+### Rebase
+
+Rebase 是把当前分支复制一份到目标分支上，就好像当前分支是基于目标分支开始开发的。可能是因为 Rebase 改变了当前开发分支的「基点（base）」，所以才有这个名字。原有的修改不会删除，只是不会被当前分支引用了。
+
+Rebase 当前分支到其与变基目标的最近公共祖先，会拷贝到目标分支末尾。这个过程可能产生冲突，这就需要手动解决。如果这个最近公共祖先正是目标分支，则理解为目标点本身就是当前位置的基点，Rebase 不会有任何作用。如果这个祖先是当前分支，即当前分支是落后于目标的，则理解为当前分支进行了空的提交，把这个空的提交复制到目标后，意味着当前分支移动到了目标分支。
+
+Rebase 动作可能改变：
+
+- 当前分支的位置。
+- 历史提交。
+
+### 修改分支的指向
+
+下面的命令让 {branch} 分支指向 {commit} 提交。
+
+```
+git branch -f {branch} {commit}
+```
+
+## conan
+
+### 依照 settings 不同决定依赖
+
+用 `requirements` 方法，在其中读取 `self.settings`，对应调用 `self.requires(r)` 将 `r` 设为依赖。
+
+## python
+
+### opencv
+
+```
+def video_iterator(video_path):
+  capture = cv2.VideoCapture(video_path)
+  while True:
+    ok, image = capture.read()
+    if not ok:
+      break
+    yield image
+```
