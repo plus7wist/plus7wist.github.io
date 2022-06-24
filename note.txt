@@ -1,5 +1,35 @@
 # 笔记
 
+## 2022年 06月 22日 星期三 18:00:59 CST
+
+Update:
+
+  data_proto_o/2.0.201
+  obj_cnn/0.21.4
+  obj_base/1.2.6
+  object_perception_port/0.4.7
+
+## 2022年 06月 20日 星期一 18:03:13 CST
+
+- locate MDC memory leak
+- MDC report demo
+
+## Fri 17 Jun 15:33:22 CST 2022
+
+- Design and review Object Model Evalutaion System.
+- Report vehicle signal by change Object Merger and Confluence.
+- Check MDC new ROI task, find out over works.
+- Build a new libyuv
+
+## 2022年 06月 16日 星期四 10:34:21 CST
+
+- 模型评测的方案评审
+- ckv 构建
+- mount-nas.go
+- confluence.cc
+- flowbag-ar1
+- extraflow client with libflow
+
 ## 2022年 06月 09日 星期四 09:38:28 CST
 
 问题：升级 MCU 之后。
@@ -30,7 +60,7 @@
 ## TODO
 
 - [ ] MDC h1z fault
-- [ ] MDC nn forword speed, first run is slow
+- [x] MDC nn forword speed, first run is slow
 - [ ] MDC RM register failed 
 - [ ] MDC ROI change
 - [ ] MDC car rear light classifcation network
